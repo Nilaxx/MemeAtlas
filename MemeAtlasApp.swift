@@ -1,17 +1,16 @@
-//
-//  MemeAtlasApp.swift
-//  MemeAtlas
-//
-//  Created by Suresh on 21/12/2025.
-//
-
 import SwiftUI
+import Firebase
 
 @main
 struct MemeAtlasApp: App {
+    init() {
+        // C'est l'appel crucial qui initialise Firebase
+        FirebaseApp.configure()
+    }
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginView()
         }
     }
 }
