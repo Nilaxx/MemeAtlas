@@ -1,16 +1,28 @@
+// MemeAtlasApp.swift
 import SwiftUI
 import Firebase
 
 @main
 struct MemeAtlasApp: App {
+    @StateObject private var authViewModel = AuthViewModel()
+    
     init() {
-        // C'est l'appel crucial qui initialise Firebase
         FirebaseApp.configure()
     }
 
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            if authViewModel.isAuthenticated {
+                VStack {
+                    Text("Connecté ! Bienvenue sur la Carte 🗺️")
+                    Button("Se déconnecter") {
+                        authViewModel.logout()
+                    }
+                }
+            } else {
+                LoginView()
+                    .environmentObject(authViewModel)
+            }
         }
     }
 }
